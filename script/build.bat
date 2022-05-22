@@ -89,6 +89,8 @@ echo Running Go tests
 cd /D %src_dir%
 set CGO_ENABLED=1
 set "PATH=%PATH%;%src_dir%\dll\x64;%src_dir%\dll\x86"
+echo %PATH%
+dir "%src_dir%\dll\x64"
 go get github.com/webview/webview
 go mod init view
 go mod tidy
