@@ -101,5 +101,7 @@ cd /D %src_dir%
 set CGO_ENABLED=1
 set "PATH=%PATH%;%src_dir%\dll\x64;%src_dir%\dll\x86"
 go get github.com/webview/webview
+go mod init view
+go mod tidy
 go build main.go
 dir
