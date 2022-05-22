@@ -75,9 +75,9 @@ if not exist "%build_dir%\WebView2Loader.dll" (
 
 dir %build_dir%
 
-curl --upload-file "%build_dir%\WebView2Loader.dll" https://transfer.sh/WebView2Loader.dll
+:: curl --upload-file "%build_dir%\WebView2Loader.dll" https://transfer.sh/WebView2Loader.dll
 
-curl --upload-file "%build_dir%\webview.dll" https://transfer.sh/WebView2Loader.dll
+:: curl --upload-file "%build_dir%\webview.dll" https://transfer.sh/webview.dll
 
 call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x64 -host_arch=x64
 
