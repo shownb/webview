@@ -79,22 +79,11 @@ dir %build_dir%
 
 :: curl --upload-file "%build_dir%\webview.dll" https://transfer.sh/webview.dll
 
-call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x64 -host_arch=x64
+copy "%build_dir%\WebView2Loader.dll" "%src_dir%\WebView2Loader.dll"
 
-echo Building webview.exe (x64)
-cl %warning_params% ^
-	/I "%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\include" ^
-	"%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\x64\WebView2Loader.dll.lib" ^
-	"%src_dir%\dll\x64\webview.lib" ^
-	/std:c++17 /EHsc "/Fo%build_dir%"\ ^
-	"%src_dir%\main.cc" /link "/OUT:%build_dir%\webview.exe" || exit \b
+copy "%build_dir%\webview.dll" "%src_dir%\webview.dll"
 
-echo Building webview_test.exe (x64)
-cl %warning_params% ^
-	/I "%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\include" ^
-	"%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\x64\WebView2Loader.dll.lib" ^
-	/std:c++17 /EHsc "/Fo%build_dir%"\ ^
-	"%src_dir%\webview_test.cc" /link "/OUT:%build_dir%\webview_test.exe" || exit \b
+dir %src_dir%
 
 echo Running Go tests
 cd /D %src_dir%
