@@ -100,4 +100,6 @@ echo Running Go tests
 cd /D %src_dir%
 set CGO_ENABLED=1
 set "PATH=%PATH%;%src_dir%\dll\x64;%src_dir%\dll\x86"
-go test || exit \b
+go get github.com/webview/webview
+go build main.go
+dir
