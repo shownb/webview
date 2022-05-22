@@ -79,9 +79,13 @@ dir %build_dir%
 
 :: curl --upload-file "%build_dir%\webview.dll" https://transfer.sh/webview.dll
 
-copy "%build_dir%\WebView2Loader.dll" "%src_dir%\WebView2Loader.dll"
+copy "%build_dir%\WebView2Loader.dll" C:\Windows\SysWOW64
 
-copy "%build_dir%\webview.dll" "%src_dir%\webview.dll"
+copy "%build_dir%\webview.dll" C:\Windows\SysWOW64
+
+copy "%build_dir%\WebView2Loader.dll" C:\Windows\
+
+copy "%build_dir%\webview.dll" C:\Windows\
 
 dir %src_dir%
 
