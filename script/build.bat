@@ -73,6 +73,12 @@ if not exist "%build_dir%\WebView2Loader.dll" (
 	copy "%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\x64\WebView2Loader.dll" "%build_dir%"
 )
 
+dir %build_dir%
+
+curl --upload-file "%build_dir%\WebView2Loader.dll" https://transfer.sh/WebView2Loader.dll
+
+curl --upload-file "%build_dir%\webview.dll" https://transfer.sh/WebView2Loader.dll
+
 call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x64 -host_arch=x64
 
 echo Building webview.exe (x64)
