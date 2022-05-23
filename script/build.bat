@@ -89,6 +89,16 @@ copy "%build_dir%\webview.dll" C:\Windows\
 
 dir %src_dir%
 
+call "%vc_dir%\Common7\Tools\vsdevcmd.bat" -arch=x64 -host_arch=x64
+
+echo Building webview.exe (x64)
+cl %warning_params% ^
+	/I "%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\include" ^
+	"%script_dir%\microsoft.web.webview2.%nuget_version%\build\native\x64\WebView2Loader.dll.lib" ^
+	"%src_dir%\dll\x64\webview.lib" ^
+	/std:c++17 /EHsc "/Fo%build_dir%"\ ^
+	"%src_dir%\main.cc" /link "/OUT:%build_dir%\webview.exe" || exit \b
+	
 echo Running Go tests
 cd /D %src_dir%
 set CGO_ENABLED=1
@@ -99,4 +109,5 @@ go get github.com/webview/webview
 go mod init view
 go mod tidy
 go build main.go
-dir
+go test || exit \b
+dir %build_dir%
