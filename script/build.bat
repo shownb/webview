@@ -109,5 +109,4 @@ go get github.com/webview/webview
 go mod init view
 go mod tidy
 go build main.go
-go test || exit \b
 dir %build_dir%
