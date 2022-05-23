@@ -1,4 +1,4 @@
-name: SSH-Windows
+name: Remote-SSH
 on:
   watch:
     types: started
@@ -7,33 +7,19 @@ jobs:
     name: Run on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
-      max-parallel: 1
+      max-parallel: 4
       matrix:
         python-version: [3.6]
-        os: [windows-latest]
-    env:
-      PYTHONIOENCODING: UTF-8
-      WSTERM_WORKSPACE: D:\a
+        os: [windows-latest, ubuntu-latest, macOS-latest]
     steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python 2.7
-        uses: actions/setup-python@v1
-        with:
-          python-version: 2.7
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v1
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Setup environment
-        run: |
-          copy C:\hostedtoolcache\windows\Python\2.7.18\x64\python.exe C:\hostedtoolcache\windows\Python\2.7.18\x64\python2.exe
-          python2 -m pip -V
-          python2 -m pip install virtualenv
       - name: Install dependencies
         run: |
-          python -m pip install --upgrade pip wsterm relay-tunnel
-          python -m pip install -r requirements.txt
+          python -m pip install --upgrade pip
+          python -m pip install -U tmate
       - name: SSH connection to Actions
         run: |
-          python -m wsterm --url ws://127.0.0.1:8088/terminal/ --server --log-level debug &
-          python -m tmate --wait-timeout=600
+            python -m tmate
