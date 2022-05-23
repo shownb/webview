@@ -8,4 +8,5 @@ mkdir "%build_dir%"
 
 go get github.com/polevpn/webview
 go mod init view
+go mod tidy
 go build -ldflags="-H windowsgui" -o webview-example.exe
