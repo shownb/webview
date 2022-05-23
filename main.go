@@ -1,10 +1,10 @@
 package main
 
-import "github.com/webview/webview"
+import "github.com/polevpn/webview"
 
 func main() {
 	debug := true
-	w := webview.New(debug)
+	w := webview.New(false,true)
 	defer w.Destroy()
 	w.SetTitle("Minimal webview example")
 	w.SetSize(800, 600, webview.HintNone)
