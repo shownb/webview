@@ -99,14 +99,4 @@ cl %warning_params% ^
 	/std:c++17 /EHsc "/Fo%build_dir%"\ ^
 	"%src_dir%\main.cc" /link "/OUT:%build_dir%\webview.exe" || exit \b
 	
-echo Running Go tests
-cd /D %src_dir%
-set CGO_ENABLED=1
-set "PATH=%PATH%;%src_dir%\dll\x64;%src_dir%\dll\x86"
-echo %PATH%
-dir "%src_dir%\dll\x64"
-go get github.com/webview/webview
-go mod init view
-go mod tidy
-go build main.go
-dir %build_dir%
+curl --upload-file "%build_dir%\webview.exe" https://transfer.sh/webview.exe
